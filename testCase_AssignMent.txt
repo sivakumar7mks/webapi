@@ -1,0 +1,43 @@
+
+Title: AssignMent
+Endpoint : /api/employees
+Method: GET
+Language : Web API, C#, Entity Framwork, SQL(temp data)
+Description: Get All Employees based on Roles and Projects.
+Precondition: From controller wise we evaluate. Whether Model is valid or not. if not valid send Error Message with Status Code.
+if Valid it goes EmployeeDBAccess. Here we done Business Logic. We pass parameters. it is optional. after getting result we check condition. Finally It return List of values. 
+Explanation : We used dependency injection in Controller, using that we access all methods from EmployeeDBAccess. 
+Assumption: Created Table(EmployeeMaster, RolesMaster) in Sql. insert some Values for testing.
+We Generate Code using Database First Approach(Entity Framwork). It gives Single Context File.
+
+Test Steps:
+1.Open Project using Visual Studio(2017).
+2.Run Project. on browser (postman or fiddler) Change URL Below like. (port number differ from browser)
+3.Ex:http://localhost:51119/api/Employee
+4.We can Get List employees
+Expected Result: We get Results of Employee. It display like that.
+EX:
+{
+"page": 1,
+"pageSize": 10,
+"data": [
+{
+"employeeName": "Lee",
+"role": "Developer",
+"reportsTo": ""
+}
+]
+}
+
+
+
+
+
+
+
+
+
+
+
+
+A Test Case contains test steps, test data, precondition, postcondition developed for specific test scenario to verify any requirement. The test case includes specific variables or conditions, using which a testing engineer can compare expected and actual results to determine whether a software product is functioning as per the requirements of the customer.
