@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Assign_Ment.Reesponse;
 using Assign_Ment.Models;
+using Assign_Ment.Implementations;
 
 
 namespace Assign_Ment.Controllers
@@ -13,30 +14,48 @@ namespace Assign_Ment.Controllers
     
     public class EmployeeController : ApiController
     {
-        EmployeeDBAccess dbAccess = new EmployeeDBAccess();
+        //Dependency Injection- Interface
+        private readonly IEmployeeDBAccess employeeDBAccess;
+        public EmployeeController(IEmployeeDBAccess employeeDBAccess)
+        {
+            this.employeeDBAccess = employeeDBAccess;
+        }
 
         //-----------------WITH PARAMETERS---------------------------------
-        //public HttpResponseMessage GetEmployees(FilterRequestDTO filterRequest)
+        [HttpGet]
+        public HttpResponseMessage GetEmployees(FilterRequestDTO filterRequest)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "--No Data. Please Add Data.-- ");
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, this.employeeDBAccess.EmployeeList(filterRequest));
+        }
+
+
+
+
+
+        //[HttpPost]
+        //public HttpResponseMessage GetEmployees()
         //{
-        //    var list = dbAccess.EmployeeList(filterRequest);            
-        //    if(list == null || list.Count == 0)
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return Request.CreateErrorResponse(HttpStatusCode.NotFound, "--No Data. Please Add Data.-- ");
+        //    }
+        //    return Request.CreateResponse(HttpStatusCode.OK, this.employeeDBAccess.EmployeeList());
+        //}
+
+        //-----------------WITH OUT PARAMETERS---------------------------------
+        //public HttpResponseMessage GetEmployees()
+        //{
+        //    var list = dbAccess.EmployeeList();
+        //    if (list == null)
         //    {
         //        return Request.CreateErrorResponse(HttpStatusCode.NotFound, "--No Data. Please Add Data.-- ");
         //    }
         //    return Request.CreateResponse(HttpStatusCode.OK, list);
-        //    //return Ok(list);
         //}
-
-        //-----------------WITH OUT PARAMETERS---------------------------------
-        public HttpResponseMessage GetEmployees()
-        {
-            var list = dbAccess.EmployeeList();
-            if (list == null)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "--No Data. Please Add Data.-- ");
-            }
-            return Request.CreateResponse(HttpStatusCode.OK, list);
-        }
 
     }
 }

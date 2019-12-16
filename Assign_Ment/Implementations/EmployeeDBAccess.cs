@@ -4,15 +4,13 @@ using System.Linq;
 using System.Web;
 using Assign_Ment.Models;
 using Assign_Ment.Reesponse;
+using Assign_Ment.Implementations;
 
 namespace Assign_Ment.Controllers
 {
-    public class EmployeeDBAccess
+    public class EmployeeDBAccess : IEmployeeDBAccess
     {
-
         EmployeeModelEntity entity = new EmployeeModelEntity();
-
-
 
         //-----------------WITH PARAMETERS---------------------------------
         public List<RespoonseData> EmployeeList(FilterRequestDTO filterRequest)
@@ -43,24 +41,21 @@ namespace Assign_Ment.Controllers
 
 
         //-----------------WITH OUT PARAMETERS---------------------------------
-        public RespoonseData EmployeeList()
-        {
-            var empData = entity.EmployeeMasters.Select(a => new RespoonseData
-            {
-                page = 1,
-                pageSize = 10,
-                data = a.RoleMaster.EmployeeMasters.Select(b => new EmployeeResponseModel
-                {
-                    employeeName = b.employeeName,
-                    roleName = b.RoleMaster.roleName,
-                    reportsTo = "-"
-                }).ToList(),
-            }).FirstOrDefault();  // or .ToList()
+        //    public RespoonseData EmployeeList()
+        //    {
+        //        var empData = entity.EmployeeMasters.Select(a => new RespoonseData
+        //        {
+        //            page = 1,
+        //            pageSize = 10,
+        //            data = a.RoleMaster.EmployeeMasters.Select(b => new EmployeeResponseModel
+        //            {
+        //                employeeName = b.employeeName,
+        //                roleName = b.RoleMaster.roleName,
+        //                reportsTo = "-"
+        //            }).ToList(),
+        //        }).FirstOrDefault();  // or .ToList()
 
-            return empData;
-        }
-
-
-
+        //        return empData;
+        //    }
     }
 }

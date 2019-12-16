@@ -169,10 +169,11 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
-    <Compile Include="Controllers\EmployeeDBAccess.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Implementations\EmployeeDBAccess.cs" />
+    <Compile Include="Implementations\IEmployeeDBAccess.cs" />
     <Compile Include="Models\EmployeeMaster.cs" />
     <Compile Include="Models\EmployeeModelEntity.cs" />
     <Compile Include="Models\RoleMaster.cs" />
